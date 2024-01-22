@@ -1,0 +1,22 @@
+class Solution:
+    def beautifulIndices(self, s: str, a: str, b: str, k: int) -> List[int]:
+        if(s==s[0]*len(s) and a==s[0]*len(a) and b==s[0]*len(b)):
+            return [i for i in range(len(s)-len(a)+1)]
+        ans=[]
+        l1=[i for i in range(len(s)) if s.startswith(b,i)]
+        l2=[i for i in range(len(s)) if s.startswith(a,i)]
+        n1=len(l1)
+        for i in l2:
+            l=0
+            r=n1-1
+            while(l<=r):
+                m=(l+r)//2
+                j=l1[m]
+                if(abs(j-i)<=k):
+                    ans.append(i)
+                    break
+                elif(j<i):
+                    l=m+1
+                else:
+                    r=m-1
+        return ans
